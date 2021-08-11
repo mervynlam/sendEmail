@@ -8,10 +8,5 @@ package com.mervyn.consts;
  */
 public class EmailConstants {
     public static final String CONFIG_FILE_NAME = "config";
-    public static final String SESSION_FILE_NAME = "session";
     public static final String UTF8_CHARSET = "UTF-8";
-
-    public static final String SESSION_JSON_NAME_KEY = "userName";
-    public static final String SESSION_JSON_SESSION_KEY = "session";
-
 }

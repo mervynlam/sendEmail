@@ -1,12 +1,9 @@
 package com.mervyn;
 
 import com.mervyn.config.EmailConfig;
-import com.mervyn.consts.EmailConstants;
 import com.mervyn.enums.ConfEnum;
 import com.mervyn.utils.AttachmentUtils;
 import com.mervyn.utils.EmailUtils;
-import com.mervyn.utils.FileUtils;
-import com.mervyn.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.mail.MessagingException;
@@ -81,12 +78,7 @@ public class SendEmail {
     }
 
     private static Session getSession() {
-//        if (FileUtils.isExist(EmailConstants.SESSION_FILE_NAME)) {
-//            Session session = SessionUtils.loadSession(conf);
-//            if (session != null)
-//                return session;
-//        }
-        return SessionUtils.getSession(conf, emailProps);
+        return EmailUtils.getSession(conf, emailProps);
     }
 
     /**
@@ -125,6 +117,13 @@ public class SendEmail {
                 Transport.send(message);
             } catch (MessagingException e) {
                 log.error("发送文件 {} 失败",file.getName());
+                e.printStackTrace();
+            }
+            try {
+                log.info("休息1秒");
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                log.info("休息失败");
                 e.printStackTrace();
             }
         }

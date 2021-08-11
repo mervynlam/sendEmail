@@ -3,6 +3,7 @@ package com.mervyn.utils;
 import com.mervyn.config.EmailConfig;
 import com.mervyn.consts.EmailConstants;
 import com.mervyn.enums.ConfEnum;
+import com.sun.xml.internal.ws.wsdl.writer.document.soap.Body;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.activation.DataHandler;
@@ -53,12 +54,27 @@ public class EmailUtils {
         message.setFrom(new InternetAddress(fromEmail));
 //        设置接收方地址:
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-//        设置邮件主题:
-        message.setSubject((title), EmailConstants.UTF8_CHARSET);
-//        设置邮件正文:
-//        message.setText("Hi Xiaoming...??", EmailConstants.UTF8_CHARSET);
-//        Transport.send(message);
         return message;
+    }
+
+    /**
+     * @author: mervynlam
+     * @Title: getSession
+     * @Description: 获取session
+     * @date: 2021/8/11 17:47
+     */
+    public static Session getSession(EmailConfig conf, Properties emailProps) {
+        log.info("获取session实例");
+        // 获取Session实例:
+        Session session = Session.getInstance(emailProps, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(conf.getProperty(ConfEnum.FROM_EMAIL.getKey()),
+                        conf.getProperty(ConfEnum.AUTH_CODE.getKey()));
+            }
+        });
+        // 设置debug模式便于调试:
+//        session.setDebug(true);
+        return session;
     }
 
     /**
@@ -68,12 +84,18 @@ public class EmailUtils {
      * @date: 2021/8/11 17:48
      */
     public static MimeMessage addAttachment(MimeMessage message, File file) throws MessagingException, UnsupportedEncodingException {
-        Multipart multipart = new MimeMultipart();
+        message.setSubject(file.getName(), EmailConstants.UTF8_CHARSET);
+        MimeMultipart multipart = new MimeMultipart();
+
+        BodyPart textBodyPart = new MimeBodyPart();
+        textBodyPart.setText("发送附件："+file.getName()+"，请查收");
+
         BodyPart bodyPart = new MimeBodyPart();
-//        log.info(MimeUtility.encodeText(file.getName())+"===========");
         bodyPart.setFileName(file.getName());
         bodyPart.setDataHandler(new DataHandler(new FileDataSource(file)));
+        multipart.addBodyPart(textBodyPart);
         multipart.addBodyPart(bodyPart);
+        multipart.setSubType("mixed");
         message.setContent(multipart);
         return message;
     }
