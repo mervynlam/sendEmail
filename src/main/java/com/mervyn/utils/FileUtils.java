@@ -26,4 +26,20 @@ public class FileUtils {
     public static String getExt(File file) {
         return getExt(file.getName());
     }
+
+    public static boolean isExist(File file) {
+        return file.exists();
+    }
+
+    public static boolean isExist(String filename) {
+        return isExist(new File(filename));
+    }
+
+    public static void mkdirs(File file) {
+        file.mkdirs();
+    }
+
+    public static void mkdirs(String filename) {
+        mkdirs(new File(filename));
+    }
 }
