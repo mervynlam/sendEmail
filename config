@@ -1,0 +1,22 @@
+# 发件邮箱
+from_email:xxx@example.com
+# 密码/授权码
+auth_code:password
+# 收件邮箱
+to_email:yyy@example.com
+
+# 邮件标题
+title:title
+
+# 类型（POP3/SMTP/IMAP），暂时只支持smtp
+# type:SMTP
+# 服务地址
+server:smtp.163.com
+# 端口
+port:465
+# 是否开启SSL
+enable_ssl:true
+
+# 附件位置
+attachment_dir:temp
+attachment_extension:mobi
