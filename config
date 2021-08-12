@@ -5,9 +5,6 @@ auth_code:password
 # 收件邮箱
 to_email:yyy@example.com
 
-# 邮件标题
-title:title
-
 # 类型（POP3/SMTP/IMAP），暂时只支持smtp
 # type:SMTP
 # 服务地址
@@ -19,4 +16,7 @@ enable_ssl:true
 
 # 附件位置
 attachment_dir:temp
-attachment_extension:mobi
+# 需要发送的扩展名，留空则全部，英文逗号分隔
+attachment_extension:mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf
+# 是否自动为mobi,azw,pdf以外的所有文件输入Convert标题
+auto_convert:true

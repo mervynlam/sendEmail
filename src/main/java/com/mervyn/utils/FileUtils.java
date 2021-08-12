@@ -42,4 +42,38 @@ public class FileUtils {
     public static void mkdirs(String filename) {
         mkdirs(new File(filename));
     }
+
+    /**
+     * @author: mervynlam
+     * @Title: checkFile
+     * @Description: 检查文件是否是指定后缀
+     * @date: 2021/8/12 11:26
+     */
+    public static boolean checkFileExt(String targetExt, String fileExt) {
+        int index = targetExt.lastIndexOf(".");
+        if (index >= 0) {
+            targetExt = targetExt.substring(index+1);
+        }
+        return targetExt.trim().equalsIgnoreCase(fileExt);
+    }
+
+    /**
+     * @author: mervynlam
+     * @Title: isConvert
+     * @Description: 判断是否为pdf,mobi,azw文件
+     * @date: 2021/8/12 11:42
+     */
+    public static boolean isConvert(String fileName) {
+        String ext = getExt(fileName);
+        return !(checkFileExt("pdf", ext)
+                ||checkFileExt("mobi", ext)
+                ||checkFileExt("azw", ext));
+    }
+
+    public static boolean isConvert(File file) {
+        String ext = getExt(file.getName());
+        return !(checkFileExt("pdf", ext)
+                ||checkFileExt("mobi", ext)
+                ||checkFileExt("azw", ext));
+    }
 }

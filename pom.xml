@@ -44,33 +44,15 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.11</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.75</version>
-        </dependency>
 
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>aliyunProfiel</id>
-            <repositories>
-                <repository>
-                    <id>aliyun-maven-central</id>
-                    <name>aliyun maven</name>
-                    <url>https://maven.aliyun.com/repository/public</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
+    <repositories>
+        <repository>
+            <id>aliyun-repository</id>
+            <name>aliyun repository</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

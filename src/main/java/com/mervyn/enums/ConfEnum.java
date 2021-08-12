@@ -16,7 +16,7 @@ public enum ConfEnum {
     ATTACHMENT_DIR("attachment_dir"),
     TYPE("type"),
     ATTACHMENT_EXTENSION("attachment_extension"),
-    TITLE("title"),
+    AUTO_CONVERT("auto_convert"),
     ;
 
     ConfEnum(String key) {

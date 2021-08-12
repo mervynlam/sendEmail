@@ -3,15 +3,16 @@ package com.mervyn.utils;
 import com.mervyn.config.EmailConfig;
 import com.mervyn.consts.EmailConstants;
 import com.mervyn.enums.ConfEnum;
-import com.sun.xml.internal.ws.wsdl.writer.document.soap.Body;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 /**
@@ -47,7 +48,7 @@ public class EmailUtils {
      * @Description: 初始化邮件对象
      * @date: 2021/8/11 17:47
      */
-    public static MimeMessage initMessage(Session session, String fromEmail, String toEmail, String title) throws MessagingException {
+    public static MimeMessage initMessage(Session session, String fromEmail, String toEmail) throws MessagingException {
         log.info("初始化邮件对象");
         MimeMessage message = new MimeMessage(session);
 //        设置发送方地址:
@@ -83,8 +84,13 @@ public class EmailUtils {
      * @Description: 添加附件
      * @date: 2021/8/11 17:48
      */
-    public static MimeMessage addAttachment(MimeMessage message, File file) throws MessagingException, UnsupportedEncodingException {
-        message.setSubject(file.getName(), EmailConstants.UTF8_CHARSET);
+    public static MimeMessage addAttachment(MimeMessage message, File file, boolean autoConvert) throws MessagingException {
+        //根据文件类型自动配置Convert标题
+        if (autoConvert && FileUtils.isConvert(file)) {
+            message.setSubject("Convert", EmailConstants.UTF8_CHARSET);
+        } else {
+            message.setSubject(file.getName(), EmailConstants.UTF8_CHARSET);
+        }
         MimeMultipart multipart = new MimeMultipart();
 
         BodyPart textBodyPart = new MimeBodyPart();

@@ -47,17 +47,18 @@ public class AttachmentUtils {
     public static File[] getAttachment(String attachmentPath, String attachmentExt) {
         log.info("读取附件");
         File attachmentDir = new File(attachmentPath);
+        List<String> exts = Arrays.asList(attachmentExt.split(","));
         return attachmentDir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 if (StringUtils.isBlank(attachmentExt)) {
                     return true;
                 }
-                List<String> exts = Arrays.asList(attachmentExt.split(","));
                 String fileExt = FileUtils.getExt(name);
-                long count = exts.stream().map(ext -> ext.contains(fileExt)).count();
+                long count = exts.stream().map(ext -> FileUtils.checkFileExt(ext, fileExt)).count();
                 return count > 0;
             }
         });
     }
+
 }

@@ -11,7 +11,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 /**
@@ -90,8 +89,7 @@ public class SendEmail {
     private static MimeMessage initMessage(Session session) throws MessagingException {
         String fromEmail = conf.getProperty(ConfEnum.FROM_EMAIL.getKey());
         String toEmail = conf.getProperty(ConfEnum.TO_EMAIL.getKey());
-        String title = conf.getProperty(ConfEnum.TITLE.getKey());
-        return EmailUtils.initMessage(session, fromEmail, toEmail, title);
+        return EmailUtils.initMessage(session, fromEmail, toEmail);
     }
 
     /**
@@ -104,12 +102,9 @@ public class SendEmail {
         for (File file : files) {
             try {
                 log.info("添加附件 {}", file.getName());
-                message = EmailUtils.addAttachment(message, file);
+                message = EmailUtils.addAttachment(message, file, Boolean.valueOf(conf.getProperty(ConfEnum.AUTO_CONVERT.getKey())));
             } catch (MessagingException e) {
                 log.error("添加附件 {} 失败", file.getName());
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                log.error("文件名编码失败：{}", file.getName());
                 e.printStackTrace();
             }
             try {
@@ -123,7 +118,7 @@ public class SendEmail {
                 log.info("休息1秒");
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                log.info("休息失败");
+                log.error("休息失败");
                 e.printStackTrace();
             }
         }

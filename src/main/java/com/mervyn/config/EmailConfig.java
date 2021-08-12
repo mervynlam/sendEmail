@@ -51,6 +51,21 @@ public class EmailConfig {
         return value.trim();
     }
 
+    public boolean getBoolean(String key) {
+        String value = this.getValue(key.trim());
+        if (value == null) {
+            log.error("key : {} 不存在", key);
+            throw new NoSuchElementException();
+        }
+        return Boolean.valueOf(value.trim());
+    }
+
+    /**
+     * @author: mervynlam
+     * @Title: loadProperties
+     * @Description: 加载配置文件
+     * @date: 2021/8/12 9:41
+     */
     private Properties loadProperties(String path) {
         log.info("加载配置文件：{}", path);
         Properties properties = new Properties();
@@ -61,7 +76,7 @@ public class EmailConfig {
             log.error("找不到文件：{}", path);
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("加载配置文件：{}", path);
+            log.error("加载配置文件失败：{}", path);
         }
         return properties;
     }
