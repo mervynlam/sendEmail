@@ -27,7 +27,9 @@ public class SendEmail {
 
     public static void main(String[] args) {
         initEmailProps();
-        checkAttachment();
+        if (!checkAttachment()) {
+            return;
+        }
         MimeMessage mimeMessage;
         Session session = getSession();
         try {
@@ -58,10 +60,10 @@ public class SendEmail {
      * @Description: 检查附件
      * @date: 2021/8/11 17:48
      */
-    private static void checkAttachment() {
+    private static boolean checkAttachment() {
         String attachmentPath = conf.getProperty(ConfEnum.ATTACHMENT_DIR.getKey());
         String extStr = conf.getProperty(ConfEnum.ATTACHMENT_EXTENSION.getKey());
-        AttachmentUtils.checkAttachment(attachmentPath, extStr);
+        return AttachmentUtils.checkAttachment(attachmentPath, extStr);
     }
 
     /**

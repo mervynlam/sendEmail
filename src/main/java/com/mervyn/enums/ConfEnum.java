@@ -14,7 +14,6 @@ public enum ConfEnum {
     AUTH_CODE("auth_code"),
     ENABLE_SSL("enable_ssl"),
     ATTACHMENT_DIR("attachment_dir"),
-    TYPE("type"),
     ATTACHMENT_EXTENSION("attachment_extension"),
     AUTO_CONVERT("auto_convert"),
     ;

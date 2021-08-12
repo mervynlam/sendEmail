@@ -5,8 +5,6 @@ auth_code:password
 # 收件邮箱
 to_email:yyy@example.com
 
-# 类型（POP3/SMTP/IMAP），暂时只支持smtp
-# type:SMTP
 # 服务地址
 server:smtp.163.com
 # 端口
