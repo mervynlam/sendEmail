@@ -1,20 +1,20 @@
 # 发件邮箱
-from_email:xxx@example.com
+from_email : xxx@example.com
 # 密码/授权码
-auth_code:password
+auth_code : password
 # 收件邮箱
-to_email:yyy@example.com
+to_email : yyy@example.com
 
 # 服务地址
-server:smtp.163.com
+server : smtp.163.com
 # 端口
-port:465
+port : 465
 # 是否开启SSL
-enable_ssl:true
+enable_ssl : true
 
 # 附件位置
-attachment_dir:temp
+attachment_dir : temp
 # 需要发送的扩展名，留空则全部，英文逗号分隔
-attachment_extension:mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf
+attachment_extension : mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf
 # 是否自动为mobi,azw,pdf以外的所有文件输入Convert标题
-auto_convert:true
+auto_convert : true

@@ -35,29 +35,29 @@ public class EmailConfig {
     }
 
     private String getValue(String key) {
-        if (conf.containsKey(key)) {
-            String value = this.conf.getProperty(key);
-            return value;
+        if (conf.containsKey(key.trim())) {
+            String value = this.conf.getProperty(key.trim());
+            return value.trim();
         }
         return null;
     }
 
     public String getProperty(String key) throws NoSuchElementException {
-        String value = this.getValue(key.trim());
+        String value = this.getValue(key);
         if (value == null) {
             log.error("key : {} 不存在", key);
             throw new NoSuchElementException();
         }
-        return value.trim();
+        return value;
     }
 
     public boolean getBoolean(String key) {
-        String value = this.getValue(key.trim());
+        String value = this.getValue(key);
         if (value == null) {
             log.error("key : {} 不存在", key);
             throw new NoSuchElementException();
         }
-        return Boolean.valueOf(value.trim());
+        return Boolean.valueOf(value);
     }
 
     /**

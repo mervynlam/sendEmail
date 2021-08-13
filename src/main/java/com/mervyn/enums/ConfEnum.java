@@ -11,11 +11,11 @@ public enum ConfEnum {
     PORT("port"),
     SERVER("server"),
     FROM_EMAIL("from_email"),
+    AUTO_CONVERT("auto_convert"),
     AUTH_CODE("auth_code"),
     ENABLE_SSL("enable_ssl"),
     ATTACHMENT_DIR("attachment_dir"),
     ATTACHMENT_EXTENSION("attachment_extension"),
-    AUTO_CONVERT("auto_convert"),
     ;
 
     ConfEnum(String key) {
